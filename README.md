@@ -20,7 +20,11 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
+<<<<<<< HEAD
   fakhravari: ^0.0.5
+=======
+  fakhravari: ^0.0.4
+>>>>>>> 277e3ed47fc8d7b3d3352f63e6ea69f0213afe44
 ```
 
 Then run:
