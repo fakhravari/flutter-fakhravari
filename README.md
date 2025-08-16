@@ -1,84 +1,118 @@
 # Fakhravari
 
-A collection of powerful and practical Dart **extension methods** for `String`, `int`, `double`, and `DateTime`.  
-This package helps you handle **string manipulation, date conversions (Gregorian ↔ Jalali/Hijri), Persian/Arabic number conversion, AES encryption, and numeric formatting** easily.
+A collection of useful Dart and Flutter extension methods for working with **String**, **int**, **double**, **DateTime**, and **encryption**.  
+This package provides helpers for formatting, validation, Persian/Arabic date conversions, and more.
 
 ---
 
 ## ✨ Features
-- **String Utilities**  
-  - Capitalization, masking, digit/email validation  
-  - Persian ↔ English number conversion  
-  - Persian character normalization  
-- **Date Utilities**  
-  - Gregorian ↔ Jalali conversion  
-  - Gregorian ↔ Hijri conversion (Umm al-Qura calendar)  
-  - Date formatting with/without time  
-- **Security Utilities**  
-  - AES Encryption & Decryption (CBC + PKCS7)  
-- **Number Utilities**  
-  - Integer formatting with commas  
-  - Even/Odd checks  
-  - Time formatting (minutes:seconds)  
-  - Double conversion (meters → feet, km → miles)  
+- Format numbers with commas, check even/odd, convert seconds to time string.
+- Double extensions for trimming decimals, meters to feet, km to miles.
+- String extensions for capitalization, masking, email validation, etc.
+- AES encryption/decryption with CBC mode.
+- Persian number and character conversions.
+- Convert between Persian (Jalali), Gregorian, and Hijri dates.
 
 ---
 
 ## 📦 Installation
 Add this to your `pubspec.yaml`:
+
 ```yaml
 dependencies:
   fakhravari: ^0.0.1
+```
 
+Then run:
+```bash
+flutter pub get
+```
 
-
+---
 
 ## 🚀 Usage Examples
- 🚀 Usage Examples
-String Extensions
-print('hello WORLD'.capitalize()); // Hello world
-print('abc123'.containsDigit());    // true
-print('test@example.com'.isValidEmail()); // true
-print('1234567890'.mask());         // 1234****90
-print('12345'.en2fa());  // ۱۲۳۴۵
-print('۱۲۳۴۵'.fa2en());  // 12345
-print('كريم يحيى'.fixPersianChars()); // کریم یحیی
 
-AES Encryption & Decryption
-final encrypted = 'Hello AES'.encryptAes();
-print(encrypted); // Base64 string
+### 🔢 IntExtensions
+```dart
+void main() {
+  print(1234567.formatWithCommas()); // 1,234,567
+  print(4.isEvenNumber()); // true
+  print(5.isOddNumber()); // true
+  print(125.toTimeString()); // 02:05
+}
+```
 
-final decrypted = encrypted.decryptAes();
-print(decrypted); // Hello AES
+---
 
-Jalali (Persian) Date Conversion
-final now = DateTime.now();
-print(now.toPersianDate());      // 1404/05/24
-print(now.toPersianDateTime());  // 1404/05/24 21:30:15
-print('1404/05/24'.toGregorian()); // 2025-08-15
+### 🔢 DoubleExtensions
+```dart
+void main() {
+  print(12.3400.toStringAsFixedTrimmed(3)); // 12.34
+  print(10.0.metersToFeet()); // 32.8084
+  print(5.0.kmToMiles()); // 3.106855
+}
+```
 
-Hijri (Islamic) Date Conversion
-print(now.toHijriDate());          // 1447/02/20
-print(now.toHijriWithMonthName()); // 20 صفر 1447
+---
 
-Integer & Double Extensions
-final number = 1234567;
-print(number.formatWithCommas()); // 1,234,567
-print(4.isEvenNumber());          // true
-print(5.isOddNumber());           // true
-print(125.toTimeString());        // 02:05
+### 🔤 StringExtensions
+```dart
+void main() {
+  print('hello'.capitalize()); // Hello
+  print('abc123'.containsDigit()); // true
+  print('test@example.com'.isValidEmail()); // true
+  print('1234567890'.mask()); // 1234****90
+}
+```
 
-final value = 123.4500;
-print(value.toStringAsFixedTrimmed(4)); // 123.45
-print(10.0.metersToFeet());             // 32.8084
-print(5.0.kmToMiles());                  // 3.106855
+---
 
-⚠️ Notes
+### 🔐 SecureExtensions (AES Encrypt/Decrypt)
+```dart
+void main() {
+  final encrypted = 'HelloWorld'.encryptAes();
+  print(encrypted); // متن رمزنگاری شده
 
-AES: Uses CBC mode with PKCS7 padding, 256-bit key, and 128-bit IV.
+  final decrypted = encrypted.decryptAes();
+  print(decrypted); // HelloWorld
+}
+```
 
-Hijri Conversion: Based on hijri_calendar package.
+---
 
-Jalali Conversion: Based on shamsi_date package.
+### 🇮🇷 PersianExtensions
+```dart
+void main() {
+  print('123456'.en2fa()); // ۱۲۳۴۵۶
+  print('۱۲۳۴۵۶'.fa2en()); // 123456
+  print('يكد'.fixPersianChars()); // یکد
+  print('1403/05/16'.toGregorian()); // 2024-08-06 00:00:00.000
+}
+```
 
-Number Formatting: Integer and double helpers for common formatting/conversion.
+---
+
+### 🗓 PersianDateTimeExtensions
+```dart
+void main() {
+  final now = DateTime.now();
+  print(now.toPersianDate()); // 1403/05/16
+  print(now.toPersianDateTime()); // 1403/05/16 14:23:45
+}
+```
+
+---
+
+### 🕌 HijriDateExtensions
+```dart
+void main() {
+  final now = DateTime.now();
+  print(now.toHijriDate()); // 1446/01/22
+  print(now.toHijriWithMonthName()); // 22 Muharram 1446
+}
+```
+
+---
+
+## 📜 License
+MIT License © 2025 Mohammad Hossein Fakhravari
