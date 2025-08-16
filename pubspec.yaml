@@ -1,6 +1,6 @@
 name: fakhravari
 description: Dart extension methods for String and num types, providing utilities like capitalization, number formatting, and validation.
-version: 0.0.3
+version: 0.0.4
 homepage: https://fakhravari.ir
 repository: https://github.com/fakhravari/flutter-fakhravari
 
